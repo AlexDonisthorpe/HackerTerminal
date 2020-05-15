@@ -71,31 +71,15 @@ public class Hacker : MonoBehaviour
 
     private void RunMainMenu(string input)
     {
-        if (input == "1")
+        bool isValidLevelNumber = (input == "1" || input == "2" || input == "3");
+        if (isValidLevelNumber)
         {
-            level = 1;
-            currentPassword = level1Passwords[UnityEngine.Random.Range(0,level1Passwords.Length)];
-            StartGame();
-        }
-        else if (input == "2")
-        {
-            level = 2;
-            currentPassword = level3Passwords[UnityEngine.Random.Range(0, level2Passwords.Length)];
-            StartGame();
-        }
-        else if (input == "3")
-        {
-            level = 3;
-            currentPassword = level3Passwords[UnityEngine.Random.Range(0, level3Passwords.Length)];
+            level = int.Parse(input);
             StartGame();
         }
         else if (input == "007")
         {
             Terminal.WriteLine("Please select a level, Mr Bond");
-        }
-        else if (input == "1337")
-        {
-            Terminal.WriteLine("Administrator Mode Activated");
         }
         else
         {
@@ -105,7 +89,28 @@ public class Hacker : MonoBehaviour
 
     void StartGame()
     {
-        Terminal.WriteLine("The current selected level is " + level);
+        SetPassword();
         currentScreen = Screen.Password;
+        Terminal.ClearScreen();
+        Terminal.WriteLine("Please enter your password:");
+    }
+
+    private void SetPassword()
+    {
+        switch (level)
+        {
+            case 1:
+                currentPassword = level1Passwords[UnityEngine.Random.Range(0, level1Passwords.Length)];
+                break;
+            case 2:
+                currentPassword = level2Passwords[UnityEngine.Random.Range(0, level2Passwords.Length)];
+                break;
+            case 3:
+                currentPassword = level3Passwords[UnityEngine.Random.Range(0, level3Passwords.Length)];
+                break;
+            default:
+                Debug.LogError("Invalid Level Number");
+                break;
+        }
     }
 }
