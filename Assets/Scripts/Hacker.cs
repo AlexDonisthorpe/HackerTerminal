@@ -7,13 +7,14 @@ public class Hacker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowMainMenu();
-
+        var greeting = "Hello anon";
+        ShowMainMenu(greeting);
     }
 
-    private static void ShowMainMenu()
+    private void ShowMainMenu(string greeting)
     {
         Terminal.ClearScreen();
+        Terminal.WriteLine(greeting);
         Terminal.WriteLine("Welcome to HaxxOSv2.0.1");
         Terminal.WriteLine("");
         Terminal.WriteLine("Scanning for vulnerable devices...");
