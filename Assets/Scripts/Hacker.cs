@@ -17,8 +17,6 @@ public class Hacker : MonoBehaviour
     Screen currentScreen;
     string currentPassword;
 
-    String[] passwords = { "Apple", "Password", "Transaction" };
-
     // Start is called before the first frame update
     void Start()
     {
@@ -52,9 +50,14 @@ public class Hacker : MonoBehaviour
         else if (currentScreen == Screen.MainMenu)
         {
             RunMainMenu(input);
-        } else if (currentScreen == Screen.Password)
+        }
+        else if (currentScreen == Screen.Password)
         {
             CheckPassword(input);
+        }
+        else if (currentScreen == Screen.Win)
+        {
+            ShowMainMenu();
         }
     }
 
@@ -62,10 +65,44 @@ public class Hacker : MonoBehaviour
     {
         if(input == currentPassword)
         {
-            Terminal.WriteLine("Success! Unlocking device...");
+            DisplayWinScreen();
         } else
         {
             Terminal.WriteLine("Incorrect password. Please try again.");
+        }
+    }
+
+    void DisplayWinScreen()
+    {
+        currentScreen = Screen.Win;
+        Terminal.ClearScreen();
+        ShowLevelReward();
+    }
+
+    private void ShowLevelReward()
+    {
+        switch (level)
+        {
+            case 1:
+                Terminal.WriteLine("Looks like she has some skeletons in her closet...");
+                Terminal.WriteLine(@"
+      #############                         #############
+    ##            *##                     ##############*##
+   #               **#                   ################**#
+  #       %% %%    ***#                 ########  #  ####***#
+ #       %%%%%%%   ****#               ########       ###****#
+#         %%%%%    *****#             ##########     ####*****#
+#   ###     %     ###***#             ####   ##### #####   ***#
+#  # ####       #### #**#             ###      #######      **#
+#  #     #     #     #**#             ###   X   #####   X   **#
+#   #####  # #  #####***#             ####     ## # ##     ***#
+#         #   #  *******#             ########## ### ##*******#
+ ### #           **# ###               ### ############**# ###
+     # - - - - - - #                       ##-#-#-#-#-#-##
+      | | | | | | |                         | | | | | | |
+
+");
+                break;
         }
     }
 
