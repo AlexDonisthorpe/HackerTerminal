@@ -11,6 +11,9 @@ public class Hacker : MonoBehaviour
     // Game state
     int level;
     Screen currentScreen;
+    string currentPassword;
+
+    String[] passwords = { "Apple", "Password", "Transaction" };
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +48,20 @@ public class Hacker : MonoBehaviour
         else if (currentScreen == Screen.MainMenu)
         {
             RunMainMenu(input);
+        } else if (currentScreen == Screen.Password)
+        {
+            CheckPassword(input);
+        }
+    }
+
+    private void CheckPassword(string input)
+    {
+        if(input == currentPassword)
+        {
+            Terminal.WriteLine("Success! Unlocking device...");
+        } else
+        {
+            Terminal.WriteLine("Incorrect password. Please try again.");
         }
     }
 
@@ -82,6 +99,12 @@ public class Hacker : MonoBehaviour
     void StartGame()
     {
         Terminal.WriteLine("The current selected level is " + level);
+        SetPassword();
         currentScreen = Screen.Password;
+    }
+
+    private void SetPassword()
+    {
+        currentPassword = passwords[level-1];
     }
 }
