@@ -15,14 +15,13 @@ public class Hacker : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        ShowMainMenu("Hello User");
-        currentScreen = Screen.MainMenu;
+        ShowMainMenu();
     }
 
-    void ShowMainMenu(string greeting)
+    void ShowMainMenu()
     {
+        currentScreen = Screen.MainMenu;
         Terminal.ClearScreen();
-        Terminal.WriteLine(greeting);
         Terminal.WriteLine("Welcome to HaxxOSv2.0.1");
         Terminal.WriteLine("");
         Terminal.WriteLine("Scanning for vulnerable devices...");
@@ -39,25 +38,38 @@ public class Hacker : MonoBehaviour
 
     void OnUserInput(string input)
     { //TODO Handle differently depending on current screen
-        if(input == "menu")
+        if (input == "menu")
         {
-            ShowMainMenu("Hello User");
-        } else if(input == "1")
+            ShowMainMenu();
+        }
+        else if (currentScreen == Screen.MainMenu)
+        {
+            RunMainMenu(input);
+        }
+    }
+
+    private void RunMainMenu(string input)
+    {
+        if (input == "1")
         {
             level = 1;
             StartGame();
-        } else if (input == "2")
+        }
+        else if (input == "2")
         {
             level = 2;
             StartGame();
-        } else if (input == "3")
+        }
+        else if (input == "3")
         {
             level = 3;
             StartGame();
-        } else if (input == "007")
+        }
+        else if (input == "007")
         {
-            ShowMainMenu("Greetings, Mr Bond");
-        } else if (input == "1337")
+            Terminal.WriteLine("Please select a level, Mr Bond");
+        }
+        else if (input == "1337")
         {
             Terminal.WriteLine("Administrator Mode Activated");
         }
