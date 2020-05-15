@@ -7,6 +7,10 @@ public class Hacker : MonoBehaviour
 {
     // Definitions
     enum Screen { MainMenu, Password, Win };
+    string[] level1Passwords = { "Apple", "Bananas", "Orange", "Four", "Shoes" };
+    string[] level2Passwords = { "Password", "Football", "Television", "Barbeque", "Automobile" };
+    string[] level3Passwords = { "Transaction", "Transfer", "Dollars", "Phonetic", "Alphabet" };
+
 
     // Game state
     int level;
@@ -70,16 +74,19 @@ public class Hacker : MonoBehaviour
         if (input == "1")
         {
             level = 1;
+            currentPassword = level1Passwords[UnityEngine.Random.Range(0,level1Passwords.Length)];
             StartGame();
         }
         else if (input == "2")
         {
             level = 2;
+            currentPassword = level3Passwords[UnityEngine.Random.Range(0, level2Passwords.Length)];
             StartGame();
         }
         else if (input == "3")
         {
             level = 3;
+            currentPassword = level3Passwords[UnityEngine.Random.Range(0, level3Passwords.Length)];
             StartGame();
         }
         else if (input == "007")
@@ -99,12 +106,6 @@ public class Hacker : MonoBehaviour
     void StartGame()
     {
         Terminal.WriteLine("The current selected level is " + level);
-        SetPassword();
         currentScreen = Screen.Password;
-    }
-
-    private void SetPassword()
-    {
-        currentPassword = passwords[level-1];
     }
 }
